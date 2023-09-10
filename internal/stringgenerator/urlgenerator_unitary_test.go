@@ -59,14 +59,6 @@ func TestMountQueryString(t *testing.T) {
 	})
 }
 
-//	func TestGeneratePBILocalUrl(t *testing.T) {
-//		t.Run("Mount url for other platform", func(t *testing.T) {
-//			got := GeneratePBILocalUrl(structMock)
-//			want := fmt.Sprintf("%s?token=%s&email=%s&cookiesHasBeenAccepted=true", basePBIUrl, fakeAccessToken, fakeEmail)
-//			validateString(t, got, want)
-//		})
-//	}
-
 func validateString(t testing.TB, got, want string) {
 	t.Helper()
 	if got != want {
