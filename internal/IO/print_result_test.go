@@ -19,10 +19,10 @@ func TestPrintPBIResult(t *testing.T) {
 	}
 
 	t.Run("Validate print with success the URL", func(t *testing.T) {
-		testFunction(t, "http://blablabla", "Generated url: http://blablabla", nil)
+		testFunction(t, "http://blablabla", successMessagePrefix+"http://blablabla", nil)
 	})
 
 	t.Run("Should print an error message when err is not nil", func(t *testing.T) {
-		testFunction(t, "", "Error while getting your url: Whatever", errors.New("Whatever"))
+		testFunction(t, "", errorMessagePrefix+"Whatever", errors.New("Whatever"))
 	})
 }
