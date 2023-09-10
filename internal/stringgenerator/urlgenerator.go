@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	basePBIUrl = "http://localhost:3000/bi/dashboard/"
+	BasePBIUrl = "http://localhost:3000/bi/dashboard/"
 )
 
 type Struct struct {
@@ -27,12 +27,8 @@ func GeneratePBILocalUrl(loginData login.ILogin, desiredPlatform enum.DesiredPla
 
 	tmpName := Struct{login: loginData, loginResponse: response, desiredPlatform: desiredPlatform}
 
-	return basePBIUrl + tmpName.mountQueryString(), nil
+	return BasePBIUrl + tmpName.mountQueryString(), nil
 }
-
-// func GeneratePBILocalUrl(struc Struct) string {
-// 	return basePBIUrl + struc.mountQueryString()
-// }
 
 func (s Struct) mountQueryString() string {
 	queryString := fmt.Sprintf(
