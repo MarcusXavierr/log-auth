@@ -12,42 +12,43 @@ const (
 	BasePBIUrl = "http://localhost:3000/bi/dashboard/"
 )
 
-type Struct struct {
-	login           login.ILogin
+// urlGeneratorData aims to store data from user login, its desiredPlatform and also the login response which stores the access token
+type urlGeneratorData struct {
+	login           login.Login
 	loginResponse   login.Response
 	desiredPlatform enum.DesiredPlatform
 }
 
-func GeneratePBILocalUrl(loginData login.ILogin, desiredPlatform enum.DesiredPlatform) (string, error) {
+func GeneratePBILocalUrl(loginData login.Login, desiredPlatform enum.DesiredPlatform) (string, error) {
 	response, err := loginData.GetResponseData()
 
 	if err != nil {
 		return "", err
 	}
 
-	tmpName := Struct{login: loginData, loginResponse: response, desiredPlatform: desiredPlatform}
+	urlData := urlGeneratorData{login: loginData, loginResponse: response, desiredPlatform: desiredPlatform}
 
-	return BasePBIUrl + tmpName.mountQueryString(), nil
+	return BasePBIUrl + urlData.mountQueryString(), nil
 }
 
-func (s Struct) mountQueryString() string {
+func (u urlGeneratorData) mountQueryString() string {
 	queryString := fmt.Sprintf(
 		"?token=%s&email=%s&cookiesHasBeenAccepted=true",
-		s.loginResponse.Auth.AccessToken,
-		s.login.GetCredentials().Email,
+		u.loginResponse.Auth.AccessToken,
+		u.login.GetCredentials().Email,
 	)
 
-	return queryString + s.getRightDataset()
+	return queryString + u.getRightDataset()
 }
 
-func (s Struct) getRightDataset() string {
+func (u urlGeneratorData) getRightDataset() string {
 	baseQueryString := "&datasetId="
 
-	switch s.desiredPlatform {
+	switch u.desiredPlatform {
 	case enum.ShipmentIntel:
-		return baseQueryString + s.login.GetDatasets().ShipmentIntel
+		return baseQueryString + u.login.GetDatasets().ShipmentIntel
 	case enum.FreightIntel:
-		return baseQueryString + s.login.GetDatasets().FreightIntel
+		return baseQueryString + u.login.GetDatasets().FreightIntel
 	}
 
 	return ""

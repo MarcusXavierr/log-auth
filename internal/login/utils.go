@@ -5,7 +5,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-func MountLoginData() Login {
+func MountLoginData() loginData {
 	email := viper.GetString(constants.EMAIL)
 	password := viper.GetString(constants.PASSWORD)
 	endpoint := viper.GetString(constants.ENDPOINT)
@@ -13,7 +13,7 @@ func MountLoginData() Login {
 	shipmentIntel := viper.GetString(constants.SHIPMENT_INTEL_DATASET_ID)
 	freightIntel := viper.GetString(constants.FREIGHT_INTEL_DATASET_ID)
 
-	data := Login{
+	data := loginData{
 		credentials: Credentials{Email: email, Password: password},
 		datasets:    Datasets{ShipmentIntel: shipmentIntel, FreightIntel: freightIntel},
 		endpoint:    endpoint,

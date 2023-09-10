@@ -15,17 +15,17 @@ import (
 	"github.com/pkg/errors"
 )
 
-// ILogin represents the interface for the struct that stores user information required for login and also performs the login.
-type ILogin interface {
+// Login represents the interface for the struct that stores user information required for login and also performs the login.
+type Login interface {
 	GetResponseData() (Response, error)
 	SendLoginRequest() (*http.Response, error)
 	GetCredentials() Credentials
 	GetDatasets() Datasets
 }
 
-// Login This struct stores the essential information required for user login and
+// loginData This struct stores the essential information required for user login and
 // their corresponding settings
-type Login struct {
+type loginData struct {
 	credentials Credentials
 	datasets    Datasets
 	endpoint    string
@@ -52,7 +52,7 @@ type Auth struct {
 
 // GetResponseData This function sends a request to the endpoint specified in the
 // Login struct and parses the response into the Response struct
-func (l Login) GetResponseData() (Response, error) {
+func (l loginData) GetResponseData() (Response, error) {
 	httpResponse, err := l.SendLoginRequest()
 	if err != nil {
 		return Response{}, err
@@ -75,7 +75,7 @@ func (l Login) GetResponseData() (Response, error) {
 // SendLoginRequest This function sends a request to the endpoint specified in
 // the struct along with the credentials it contains, and then returns an HTTP
 // response
-func (l Login) SendLoginRequest() (*http.Response, error) {
+func (l loginData) SendLoginRequest() (*http.Response, error) {
 	payload, err := json.Marshal(l.credentials)
 
 	if err != nil {
@@ -101,10 +101,10 @@ func (l Login) SendLoginRequest() (*http.Response, error) {
 }
 
 // GetCredentials returns the user Credentials that are used to log in
-func (l Login) GetCredentials() Credentials {
+func (l loginData) GetCredentials() Credentials {
 	return l.credentials
 }
 
-func (l Login) GetDatasets() Datasets {
+func (l loginData) GetDatasets() Datasets {
 	return l.datasets
 }
