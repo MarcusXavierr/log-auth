@@ -12,9 +12,9 @@ const (
 
 func PrintGeneratedUrl(output io.Writer, url string, err error) {
 	if err != nil {
-		fmt.Fprintf(output, "%s%s", errorMessagePrefix, err)
+		fmt.Fprintf(output, "%s%s\n", errorMessagePrefix, err)
 		return
 	}
 
-	fmt.Fprintf(output, "%s%s", successMessagePrefix, url)
+	fmt.Fprintf(output, "%s%s\n", successMessagePrefix, url)
 }
