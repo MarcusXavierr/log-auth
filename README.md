@@ -24,10 +24,21 @@ You can also install a compiled binary to your machine and then put it in your s
 Go to the [releases page](https://github.com/MarcusXavierr/log-auth/releases) and choose the option that best fits your environment.
 
 ## Getting Started
-TO BE DONE
+To get started, just put this configuration file into your home folder, on a file name `.log-auth.yml`
 
 ### Configuration
-TO BE DONE
+This is an example config file, name `.log-auth.yml`
+```yml
+email: "your@email.com"
+password: "your_password"
+
+# default values, just change if you know what you're doing
+#
+# request_method: "POST" # the http method used
+# endpoint: "http://api-auth.homol.logcomex.io/api/login" # the endpoint to send the login request
+# shipment_intel_dataset_id: "62c3d669-c1ed-499e-bcd5-32ff1108a814" # The dataset ID represents the dataset used (each PBI product have one dataset_id)
+# freight_intel_dataset_id: "4765cb7a-b9b3-4f04-a378-a34045e31836" # same here
+```
 
 ## Usage
 
